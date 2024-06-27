@@ -1,0 +1,41 @@
+const router = require("express").Router();
+const { getAllUsers, getUserById, createUser, updateUser, deleteUser, addFriend, removeFriend } = require("../../controllers/userController");
+
+// Routes for users
+router.route("/")
+  .get((req, res) => {
+    console.log("GET request to /api/users");
+    getAllUsers(req, res);
+  })
+  .post((req, res) => {
+    console.log("POST request to /api/users");
+    createUser(req, res);
+  });
+
+// Routes for a specific user by id
+router.route("/:id")
+  .get((req, res) => {
+    console.log(`GET request to /api/users/${req.params.id}`);
+    getUserById(req, res);
+  })
+  .put((req, res) => {
+    console.log(`PUT request to /api/users/${req.params.id}`);
+    updateUser(req, res);
+  })
+  .delete((req, res) => {
+    console.log(`DELETE request to /api/users/${req.params.id}`);
+    deleteUser(req, res);
+  });
+
+// Routes for adding and removing friends
+router.route("/:userId/friends/:friendId")
+  .post((req, res) => {
+    console.log(`POST request to /api/users/${req.params.userId}/friends/${req.params.friendId}`);
+    addFriend(req, res);
+  })
+  .delete((req, res) => {
+    console.log(`DELETE request to /api/users/${req.params.userId}/friends/${req.params.friendId}`);
+    removeFriend(req, res);
+  });
+
+module.exports = router;

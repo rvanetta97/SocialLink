@@ -11,8 +11,8 @@ const UserSchema = new Schema(
     email: {
       type: String,
       unique: true,
-      required: "Vaild email address required",
-      match: [/.+@.+\..+/],
+      required: "Valid email address required",
+      match: [/.+@.+\..+/, "Please provide a valid email address"],
     },
     reactions: [
       {
@@ -31,9 +31,9 @@ const UserSchema = new Schema(
     toJSON: {
       getters: true,
     },
-  },
+  }
 );
 
-const User = model('user', UserSchema);
+const User = model("User", UserSchema);
 
 module.exports = User;

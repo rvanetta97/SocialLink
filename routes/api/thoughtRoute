@@ -1,0 +1,52 @@
+const router = require("express").Router();
+const {
+  getAllThoughts,
+  getThoughtById,
+  createThought,
+  updateThought,
+  deleteThought,
+  addReaction,
+  removeReaction
+} = require("../../controllers/thoughtController");
+
+// Route to get all thoughts and create a new thought
+router.route("/")
+  .get((req, res) => {
+    console.log("GET request to /api/thoughts");
+    getAllThoughts(req, res);
+  })
+  .post((req, res) => {
+    console.log("POST request to /api/thoughts");
+    createThought(req, res);
+  });
+
+// Route to get, update, or delete a thought by ID
+router.route("/:id")
+  .get((req, res) => {
+    console.log(`GET request to /api/thoughts/${req.params.id}`);
+    getThoughtById(req, res);
+  })
+  .put((req, res) => {
+    console.log(`PUT request to /api/thoughts/${req.params.id}`);
+    updateThought(req, res);
+  })
+  .delete((req, res) => {
+    console.log(`DELETE request to /api/thoughts/${req.params.id}`);
+    deleteThought(req, res);
+  });
+
+// Route to add a reaction to a thought
+router.route("/:thoughtId/reactions")
+  .post((req, res) => {
+    console.log(`POST request to /api/thoughts/${req.params.thoughtId}/reactions`);
+    addReaction(req, res);
+  });
+
+// Route to delete a reaction from a thought
+router.route("/:thoughtId/reactions/:reactionId")
+  .delete((req, res) => {
+    console.log(`DELETE request to /api/thoughts/${req.params.thoughtId}/reactions/${req.params.reactionId}`);
+    removeReaction(req, res);
+  });
+
+module.exports = router;
