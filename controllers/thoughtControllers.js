@@ -130,5 +130,5 @@ const thoughtController = {
   },
 };
 
-module.exports = thoughtControllers;
+module.exports = thoughtController;
   
